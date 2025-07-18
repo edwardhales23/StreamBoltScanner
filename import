@@ -1,0 +1,12 @@
+import re
+from rules import RULES
+
+class RuleEngine:
+    def __init__(self):
+        self.compiled = [(r["name"], re.compile(r["pattern"])) for r in RULES]
+
+    def match(self, line):
+        for name, regex in self.compiled:
+            if regex.search(line):
+                return name
+        return None
